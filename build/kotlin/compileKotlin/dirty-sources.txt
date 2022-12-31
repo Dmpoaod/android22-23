@@ -1,7 +1,0 @@
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\Routing.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\HTTP.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\Serialization.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\Database.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\Security.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\Application.kt
-D:\PUMA\Shop\src\main\kotlin\com\example\plugins\Monitoring.kt
