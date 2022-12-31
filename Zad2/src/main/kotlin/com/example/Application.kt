@@ -1,21 +1,48 @@
 package com.example
 
-
-import com.example.plugins.*
-import com.example.plugins.configureRouting
-import com.example.plugins.configureSerialization
-import configureDatabase
+import com.example.models.User
 import io.ktor.server.application.*
-import org.jetbrains.exposed.*
-import org.jetbrains.exposed.sql.Database
+import io.ktor.server.engine.*
+import io.ktor.server.jetty.*
+import com.example.plugins.*
+import config.firebase.FirebaseAdmin
+import io.ktor.http.*
+import io.ktor.serialization.gson.*
+import io.ktor.server.auth.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import org.slf4j.event.Level
 
-fun main(args: Array<String>): Unit =
-    io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit = io.ktor.server.jetty.EngineMain.main(args)
 
-@Suppress("unused")
 fun Application.module() {
-    Database.connect("jdbc:sqlite:./identifier.sqlite", "org.sqlite.JDBC")
-    configureRouting()
+    // initialize Firebase Admin SDK
+    FirebaseAdmin.init()
+
+    install(ContentNegotiation) { gson { setPrettyPrinting() } }
+    install(Authentication) { firebase { configure() } }
+    install(CallLogging) {
+        level = Level.INFO
+        filter { call -> call.request.path().startsWith("/") }
+    }
+
+    routing {
+        get("/") {
+            call.respond(HttpStatusCode.OK, "I'm working just fine, thanks!")
+        }
+
+        authenticate {
+            get("/authenticated") {
+                call.respond(HttpStatusCode.OK, "My name is ${call.principal<User>()?.name}, and I'm authenticated!")
+            }
+        }
+    }
+    configureSecurity()
+    configureHTTP()
+    configureMonitoring()
     configureSerialization()
-    configureDatabase()
+    configureRouting()
 }
