@@ -15,7 +15,7 @@ fun Application.configureMonitoring() {
         callIdMdc("call-id")
     }
     install(CallId) {
-        header(HttpHeaders.XRequestId)
+        allowHeader(HttpHeaders.XRequestId)
         verify { callId: String ->
             callId.isNotEmpty()
         }
