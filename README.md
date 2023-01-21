@@ -12,3 +12,4 @@ Zad 4 poprawione
 
 Zad6, Zad7, Zad8, Zad9 Zrobione na 3.0 (W folderze z Zad2)
 Poprawka w zad9
+Koło ratunkowe Flutter zamiast zadania z testami
