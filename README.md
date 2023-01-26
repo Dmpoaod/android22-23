@@ -17,3 +17,5 @@ Poprawka w zad9
 Koło ratunkowe Flutter zamiast zadania z testami
 
 Poprawione zad 7
+
+Zad notyfikacje zrobione
